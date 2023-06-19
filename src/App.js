@@ -20,7 +20,6 @@ import { withStyles } from '@mui/styles'
 import { AddOutlined, CloseOutlined, DeleteOutline } from '@mui/icons-material'
 
 const styles = (theme) => ({
-  root: {},
   header: {
     display: 'flex',
     justifyContent: 'center',
@@ -83,17 +82,17 @@ class App extends Component {
   render = () => {
     const { classes } = this.props
     return (
-      <Box className={classes.root}>
+      <Box>
         <AppBar position={'fixed'}>
           <Toolbar className={classes.header}>
-            <Typography variant={'h3'}>To do list</Typography>
+            <Typography variant={'h4'} color={'whitesmoke'} >Todo-List</Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
         <List>
           {this.state.todos.map((todo, index) => (
             <ListItem
-              key={index}
+              key={`${todo.description}-${index}`}
               secondaryAction={
                 <Tooltip title={'Delete'}>
                   <IconButton
@@ -107,7 +106,6 @@ class App extends Component {
               }
             >
               <ListItemButton
-                role={undefined}
                 onClick={() => this.handleToggle(index)}
               >
                 <ListItemIcon>
@@ -139,7 +137,7 @@ class App extends Component {
           </Box>
         ) : (
           <Grid container xs={12} className={classes.addField}>
-            <Grid item xs={3} mr={2}>
+            <Grid item xs={8} mr={2}>
               <TextField
                 aria-label={'Enter Todo'}
                 placeholder={'Enter Todo'}
@@ -152,7 +150,7 @@ class App extends Component {
                 }}
               />
             </Grid>
-            <Grid item xs={'auto'}>
+            <Grid item xs={2} sm={'auto'}>
               <Button
                 type={'submit'}
                 variant={'contained'}
@@ -161,7 +159,7 @@ class App extends Component {
                 Add
               </Button>
             </Grid>
-            <Grid item xs={'auto'}>
+            <Grid item xs={1} sm={'auto'}>
               <Tooltip title={'Close'}>
                 <IconButton onClick={() => this.setState({ open: true })}>
                   <CloseOutlined />
